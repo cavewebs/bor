@@ -1,19 +1,23 @@
 runtime: php72
 
-handlers:
-# Serve a directory as a static resource.
-- url: /stylesheets
-  static_dir: stylesheets
+# env_variables:
 
+# MYSQL_USER: root
 
-# Serve images as static resources.
-- url: /(.+\.(gif|png|jpg))$
-  static_files: \1
-  upload: .+\.(gif|png|jpg)$
+# MYSQL_PASSWORD: ""
 
-# Serve your app through a front controller at index.php or public/index.php.
-- url: .*
-  script: auto
-#config for runtime
-runtime_config:
-  document_root: web
+# MYSQL_DSN: mysql:dbname=soccer_api;unix_socket=/cloudsql/soccer-api-227216:us-central1:apiubor
+
+# beta_settings:
+
+# cloud_sql_instances: "soccer-api-227216:us-central1:apiubor"
+env_variables:
+    # Replace USER, PASSWORD, DATABASE, and CONNECTION_NAME with the
+    # values obtained when configuring your Cloud SQL instance.
+    MYSQL_USER: USER
+    MYSQL_PASSWORD: PASSWORD
+    MYSQL_DSN: mysql:dbname=soccer_api;unix_socket=/cloudsql/soccer-api-227216:us-central1:apiubor
+    
+# Use the connection name obtained when configuring your Cloud SQL instance.
+beta_settings:
+    cloud_sql_instances: "soccer-api-227216:us-central1:apiubor"

@@ -17,8 +17,15 @@ $getCountry = $crawler->filter($css_selector)->extract(array('_text', 'href'));
 // prepare and bind
 $stmt = $conn->prepare("INSERT INTO countries (c_name, c_link) VALUES (?, ?)");
 $stmt->bind_param("ss", $country_name, $country_link);
-
+echo '<table class="table">
+  <thead>
+<tr> <td>S/N</td><td>Country</td><td>Link</td></tr></thead>
+  <tbody>';
+  $h = 1;
 foreach ($getCountry as $key => $value) {
+   echo '<tr> <td>' .$h.'</td> <td>' .$value[0].'</td> <td> '. $value[1].'</td> <td>';
+
+$h++;
 $country_name = strip_tags($value[0]) ;
 $country_link = 'https://soccervista.com'.$value[1];
 $stmt->execute();
@@ -28,3 +35,5 @@ $stmt->close();
 $conn->close();
 echo 'We done here';
 ?>
+
+/home/timchosen/Desktop/apiubor/apiubor

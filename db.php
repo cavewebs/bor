@@ -22,3 +22,7 @@ catch(PDOException $e)
     {
     echo "Connection failed: " . $e->getMessage();
     }
+    
+
+
+   // gcloud compute scp /home/timchosen/Desktop/apiubor/apiubor lamp-tutorial:/var/www/html 
