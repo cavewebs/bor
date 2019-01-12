@@ -23,13 +23,15 @@ echo '<table class="table">
   <tbody>';
   $h = 1;
 foreach ($getCountry as $key => $value) {
+$co_name = htmlentities($value[0] , null, 'utf-8');
+$dname = str_replace("&nbsp;", "", $co_name);
+$country_name = $dname ;
+$country_link = 'https://soccervista.com'.$value[1];
+$stmt->execute();$country_link = 'https://soccervista.com'.$value[1];
+$stmt->execute();
    echo '<tr> <td>' .$h.'</td> <td>' .$value[0].'</td> <td> '. $value[1].'</td> <td>';
 
 $h++;
-$country_name = preg_replace("/&#?[a-z0-9]{2,8};/i","",($value[0])) ;
-$country_link = 'https://soccervista.com'.$value[1];
-$stmt->execute();
-
 }
 $stmt->close();
 $conn->close();
