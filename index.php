@@ -26,7 +26,7 @@ foreach ($getCountry as $key => $value) {
    echo '<tr> <td>' .$h.'</td> <td>' .$value[0].'</td> <td> '. $value[1].'</td> <td>';
 
 $h++;
-$country_name = strip_tags($value[0]) ;
+$country_name = preg_replace("/&#?[a-z0-9]{2,8};/i","",($value[0])) ;
 $country_link = 'https://soccervista.com'.$value[1];
 $stmt->execute();
 
@@ -35,5 +35,3 @@ $stmt->close();
 $conn->close();
 echo 'We done here';
 ?>
-
-/home/timchosen/Desktop/apiubor/apiubor

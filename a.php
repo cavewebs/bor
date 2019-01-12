@@ -31,7 +31,7 @@ $stmt->bind_param("sis", $com_name, $com_cid, $com_link);
               if($key==0){
 
               }else{
-                $com_name = strip_tags($value[0]) ;
+                $com_name = preg_replace("/&#?[a-z0-9]{2,8};/i","",($value[0])) ;
                 $com_cid = $row['c_id'];
                 $com_link = 'https://soccervista.com'.$value[1];
                 $stmt->execute();

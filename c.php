@@ -41,7 +41,7 @@ $competitionFixtureRaw = $crawler->filter('tr.predict')->each(function ($tr, $i)
       
     });
       foreach ($competitionFixtureRaw as $key => $value) {           
-          $t_name = $value[3];
+          $t_name = preg_replace("/&#?[a-z0-9]{2,8};/i","",$value[3]);
           // $m_awayteam= $value[5];
           $t_c_id = $row['com_c_id'];
           $stmt->execute();
