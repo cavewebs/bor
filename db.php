@@ -2,7 +2,7 @@
 $servername = "localhost";
 $username = "root";
 $password = "";
-$dbname = "soccer_api";
+$dbname = "soccer_api2";
 
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);

@@ -7,11 +7,15 @@ ini_set('display_errors', 1);
 
 require 'db.php';
 $j=1;
+      // prepare and bind
+      $stmt = $conn->prepare("INSERT INTO matches (m_date, m_hometeam, m_awayteam, m_round, m_com_id, m_sv_link, m_livescore_id) VALUES (?, ?, ?, ?, ?, ?, ?)");
+      $stmt->bind_param("diiiisi", $m_date, $m_hometeam, $m_awayteam, $m_round, $m_com_id, $m_sv_link, $m_livescore_id);
+
 $client = new Client();
-// try {
+try {
     // begin the transaction
     $conns->beginTransaction();
-$matches = $conn->query("SELECT * FROM competitions WHERE com_status !='99'") or die($conn->error);
+$matches = $conn->query("SELECT * FROM competitions WHERE com_status !='11'") or die($conn->error);
 while($row =  $matches->fetch_assoc()){
 if($row !=NULL){
                 echo 'the com being processed is: '.$row['com_id'].'<br />';  
@@ -55,8 +59,6 @@ if($row !=NULL){
                     echo 'competion Id: '.$m_com_id.'<br />'; 
                     echo 'The Link: '.$m_sv_link.'<br />'; 
                     echo 'Livescore Id: '.$m_livescore_id .'<br />';
-                    $stmt = $conn->prepare("INSERT INTO matches (m_date, m_hometeam, m_awayteam, m_round, m_com_id, m_sv_link, m_livescore_id) VALUES (?, ?, ?, ?, ?, ?, ?)");
-              $stmt->bind_param("diiiisi", $m_date, $m_hometeam, $m_awayteam, $m_round, $m_com_id, $m_sv_link, $m_livescore_id);
                   $stmt->execute();
 
           if ($stmt){
@@ -66,15 +68,20 @@ if($row !=NULL){
                   
                 }
               }
-               // $conns->commit();
-
-
-              $update_fixtured = $conn->query("UPDATE competitions set com_status='99' WHERE com_id='".$row['com_id']."'");
+              // $conns->commit();
+              $update_fixtured = $conn->query("UPDATE competitions set com_status='11' WHERE com_id='".$row['com_id']."'");
               if($update_fixtured){
                 echo 'Updated '.$row['com_id'].'<br />';
               
               }
           }// if row !=nu;;
       }
-      
+      } 
+catch(PDOException $e)
+    {
+    echo "Error: " . $e->getMessage();
+    }
+$conn = null;
+echo "we Made it, We are rich";
+
 ?>
